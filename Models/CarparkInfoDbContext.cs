@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 namespace carpark_info_assignment
 {
 
     public class CarparkInfoDbContext : DbContext
     {
-        [Required(ErrorMessage = "Carpark Info is required")]
-        public DbSet<CarparkInfoModel> CarparkInfo { get; set; } = null!;
+
+        public DbSet<CarparkInfoModel> CarparkInfo => Set<CarparkInfoModel>();
         private readonly IConfiguration config;
 
         public CarparkInfoDbContext(IConfiguration _config)
@@ -24,7 +23,6 @@ namespace carpark_info_assignment
             {
                 throw new SystemException("DbPath not configured in appsettings.json");
             }
-            Console.WriteLine(DbPath);
             options.UseSqlite($"Data Source={DbPath}");
         }
     }
