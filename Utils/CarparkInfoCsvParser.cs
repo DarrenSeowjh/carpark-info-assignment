@@ -5,7 +5,7 @@ using CsvHelper;
 namespace carpark_info_assignment
 {
     public class CarparkInfoCsvParser : IFileParser
-    {
+    {        
         public List<CarparkInfoModel> parseFile(string filePath)
         {
             try
@@ -15,7 +15,7 @@ namespace carpark_info_assignment
                 {
                     csv.Context.RegisterClassMap<CarparkInfoModelMap>();
                     var records = csv.GetRecords<CarparkInfoModel>().ToList();
-                    Console.WriteLine(records[0].carparkInfoModelId);
+                    
                     return records;
                 }
             }
