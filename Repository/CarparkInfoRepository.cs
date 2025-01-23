@@ -30,11 +30,11 @@ namespace carpark_info_assignment
         {
             var CarparkInfoTable = dbContext.CarparkInfo;
             IQueryable<CarparkInfoModel> result = CarparkInfoTable;
-           
+            const string noFreeParkingStr = "NO";
             if(filters.hasFreeParking.HasValue)
             {                
-                if(filters.hasFreeParking == true) result = result.Where(info => filters.noFreeParkingStr != info.freeParking.ToUpper());
-                else result = result.Where(info => filters.noFreeParkingStr == info.freeParking.ToUpper());
+                if(filters.hasFreeParking == true) result = result.Where(info => noFreeParkingStr != info.freeParking.ToUpper());
+                else result = result.Where(info => noFreeParkingStr == info.freeParking.ToUpper());
             }
             if(filters.hasNightParking.HasValue)
             {
