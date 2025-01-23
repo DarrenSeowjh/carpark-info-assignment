@@ -2,11 +2,11 @@ using CsvHelper.Configuration;
 
 namespace carpark_info_assignment
 {
-    public class CarparkInfoModelMap : ClassMap<CarparkInfoModel>
+    public class CarparkModelMap : ClassMap<CarparkModel>
     {
-        public CarparkInfoModelMap()
+        public CarparkModelMap()
         {
-            Map(m => m.carparkInfoModelId).Name("car_park_no");
+            Map(m => m.carparkModelId).Name("car_park_no");
             Map(m => m.address).Name("address");
             Map(m => m.xCoord).Name("x_coord");
             Map(m => m.yCoord).Name("y_coord");

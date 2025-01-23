@@ -4,9 +4,9 @@ namespace carpark_info_assignment
     {
         private readonly IConfiguration config;
         private readonly IFileParser fileParser;
-        private readonly ICarparkInfoRepository repo;
+        private readonly ICarparkRepository repo;
 
-        public Startup(IConfiguration _config,IFileParser _fileParser,ICarparkInfoRepository _repo)
+        public Startup(IConfiguration _config,IFileParser _fileParser,ICarparkRepository _repo)
         {
             config = _config;
             fileParser = _fileParser;
@@ -28,8 +28,8 @@ namespace carpark_info_assignment
         }
         public void InsertRepositoryDataFromFile(string csvFilePath)
         {
-            List<CarparkInfoModel> infos = fileParser.parseFile(csvFilePath);
-            repo.PersistCarparkInfos(infos);
+            List<CarparkModel> infos = fileParser.parseFile(csvFilePath);
+            repo.PersistCarparksData(infos);
         }
     }
 }

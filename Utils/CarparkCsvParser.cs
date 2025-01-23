@@ -4,19 +4,19 @@ using CsvHelper;
 
 namespace carpark_info_assignment
 {
-    public class CarparkInfoCsvParser : IFileParser
+    public class CarparkCsvParser : IFileParser
     {        
-        public List<CarparkInfoModel> parseFile(string filePath)
+        public List<CarparkModel> parseFile(string filePath)
         {
-            List<CarparkInfoModel> records = new List<CarparkInfoModel>();
+            List<CarparkModel> records = new List<CarparkModel>();
             try{
                     using (var reader = new StreamReader(filePath))
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
                         
                         try{
-                            csv.Context.RegisterClassMap<CarparkInfoModelMap>();
-                            records = csv.GetRecords<CarparkInfoModel>().ToList();
+                            csv.Context.RegisterClassMap<CarparkModelMap>();
+                            records = csv.GetRecords<CarparkModel>().ToList();
 
                         }
                         catch (UnauthorizedAccessException e)

@@ -11,10 +11,10 @@ namespace carpark_info_assignment
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddSingleton<CarparkInfoDbContext,CarparkInfoDbContext>();
-            builder.Services.AddSingleton<IFileParser,CarparkInfoCsvParser>();
-            builder.Services.AddSingleton<ICarparkInfoRepository,CarparkInfoRepository>();
-            builder.Services.AddSingleton<CarparkInfoService,CarparkInfoService>();
+            builder.Services.AddSingleton<CarparkDbContext,CarparkDbContext>();
+            builder.Services.AddSingleton<IFileParser,CarparkCsvParser>();
+            builder.Services.AddSingleton<ICarparkRepository,CarparkRepository>();
+            builder.Services.AddSingleton<CarparkActionService,CarparkActionService>();
             builder.Services.AddHostedService<DailyTaskService>();
             builder.Services.AddTransient<Startup,Startup>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

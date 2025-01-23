@@ -1,6 +1,6 @@
 namespace carpark_info_assignment
 {
-    public class CarparkInfoFilters
+    public class CarparkFilters
     {
         public bool? hasFreeParking {get;set;}
         public bool? hasNightParking {get; set;}

@@ -6,25 +6,25 @@ namespace carpark_info_assignment
     {
         private readonly IFileParser fileParser;
         private readonly IConfiguration config;
-        private CarparkInfoDbContext dbContext;
+        private CarparkDbContext dbContext;
         private Timer? timer;
-        public DailyTaskService(IFileParser _parser,IConfiguration _config,CarparkInfoDbContext _dbContext)
+        public DailyTaskService(IFileParser _parser,IConfiguration _config,CarparkDbContext _dbContext)
         {
             fileParser = _parser;
             config = _config;
             dbContext = _dbContext;
             
         }
-        private void DoDailyTask(object? state)
+        private void RunDeltaFileUpdateTask(object? state)
         {
             Console.WriteLine($"Running Task at {DateTime.Now.ToUniversalTime()}"); 
-            List<CarparkInfoModel> carparks = fileParser.parseFile(config.GetValue<string>("DailyDeltaFilePath"));
+            List<CarparkModel> carparks = fileParser.parseFile(config.GetValue<string>("DailyDeltaFilePath"));
             var dbInfo = dbContext.CarparkInfo;
             try
             {
                 foreach(var carpark in carparks)
                 {
-                    var row = dbInfo.Find(carpark.carparkInfoModelId);
+                    var row = dbInfo.Find(carpark.carparkModelId);
                     if(row != null)
                     {
                         row.address = carpark.address;
@@ -41,7 +41,7 @@ namespace carpark_info_assignment
                     }
                     else
                     {
-                        if(carpark.carparkInfoModelId == "")
+                        if(carpark.carparkModelId == "")
                             throw new Exception("carpark ID is empty or null");
                         dbContext.Add(carpark);
                     }
@@ -60,7 +60,7 @@ namespace carpark_info_assignment
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            timer = new Timer(DoDailyTask,null,TimeSpan.Zero,TimeSpan.FromSeconds(10));
+            timer = new Timer(RunDeltaFileUpdateTask,null,TimeSpan.Zero,TimeSpan.FromDays(1));
             return Task.CompletedTask;
         }
 

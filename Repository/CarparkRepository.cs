@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace carpark_info_assignment
 {
-    public class CarparkInfoRepository : ICarparkInfoRepository
+    public class CarparkRepository : ICarparkRepository
     {
-        private readonly CarparkInfoDbContext dbContext;
+        private readonly CarparkDbContext dbContext;
 
-        public CarparkInfoRepository(CarparkInfoDbContext _dbContext)
+        public CarparkRepository(CarparkDbContext _dbContext)
         {
             dbContext = _dbContext;
         }
@@ -18,18 +18,18 @@ namespace carpark_info_assignment
             dbContext.SaveChanges();
         }
 
-        public void PersistCarparkInfos(List<CarparkInfoModel> infos)
+        public void PersistCarparksData(List<CarparkModel> infos)
         {
-            foreach(CarparkInfoModel info in infos)
+            foreach(CarparkModel info in infos)
             {
                 dbContext.Add(info);
             }
             dbContext.SaveChanges();
         }      
-        public List<CarparkInfoModel> GetFilteredCarparkList(CarparkInfoFilters filters)
+        public List<CarparkModel> GetFilteredCarparkList(CarparkFilters filters)
         {
             var CarparkInfoTable = dbContext.CarparkInfo;
-            IQueryable<CarparkInfoModel> result = CarparkInfoTable;
+            IQueryable<CarparkModel> result = CarparkInfoTable;
             const string noFreeParkingStr = "NO";
             if(filters.hasFreeParking.HasValue)
             {                

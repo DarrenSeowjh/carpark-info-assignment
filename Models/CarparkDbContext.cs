@@ -2,13 +2,13 @@ using Microsoft.EntityFrameworkCore;
 namespace carpark_info_assignment
 {
 
-    public class CarparkInfoDbContext : DbContext
+    public class CarparkDbContext : DbContext
     {
 
-        public DbSet<CarparkInfoModel> CarparkInfo => Set<CarparkInfoModel>();
+        public DbSet<CarparkModel> CarparkInfo => Set<CarparkModel>();
         private readonly IConfiguration config;
 
-        public CarparkInfoDbContext(IConfiguration _config)
+        public CarparkDbContext(IConfiguration _config)
         {            
             config = _config;
             Database.EnsureCreated();
