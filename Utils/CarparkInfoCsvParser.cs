@@ -8,33 +8,43 @@ namespace carpark_info_assignment
     {        
         public List<CarparkInfoModel> parseFile(string filePath)
         {
-            try
-            {
-                using (var reader = new StreamReader(filePath))
-                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                {
-                    csv.Context.RegisterClassMap<CarparkInfoModelMap>();
-                    var records = csv.GetRecords<CarparkInfoModel>().ToList();
+            List<CarparkInfoModel> records = new List<CarparkInfoModel>();
+            try{
+                    using (var reader = new StreamReader(filePath))
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        
+                        try{
+                            csv.Context.RegisterClassMap<CarparkInfoModelMap>();
+                            records = csv.GetRecords<CarparkInfoModel>().ToList();
+
+                        }
+                        catch (UnauthorizedAccessException e)
+                        {
+                            throw new Exception(e.Message);
+                        }
+                        catch (FieldValidationException e)
+                        {                        
+                            throw new Exception(e.Message);
+                        }
+                        catch (CsvHelperException e)
+                        {                        
+                            throw new Exception(e.Message);
+                        }
                     
-                    return records;
-                }
+                        catch (Exception e)
+                        {
+                            throw new Exception(e.Message);
+                        }
+                    }
             }
-            catch (UnauthorizedAccessException e)
+            catch(Exception e)
             {
-                throw new Exception(e.Message);
+                Console.WriteLine("Error Occured: " + e.Message);
             }
-            catch (FieldValidationException e)
-            {
-                throw new Exception(e.Message);
-            }
-            catch (CsvHelperException e)
-            {
-                throw new Exception(e.Message);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+
+            return records;
+            
         }
     }
 }
