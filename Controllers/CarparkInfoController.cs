@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace carpark_info_assignment
 {
     [ApiController]
-    [Route("api/CarparkInfo")]
+    [Route("api/carparks")]
     //[Route("[controller]")]
     public class CarparkInfoController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace carpark_info_assignment
         }
         
         
-        [HttpGet("GetFilteredCarparkList")]
+        [HttpGet("filter")]
         public ActionResult<IEnumerable<CarparkInfoModel>> GetFilteredCarparkList(
                                 [FromQuery]CarparkInfoFilters filter)
         {
