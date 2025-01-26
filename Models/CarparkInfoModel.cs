@@ -1,9 +1,9 @@
 namespace carpark_info_assignment
 {
  
-    public class CarparkModel
+    public class CarparkInfo
     {
-        public string carparkModelId { get; set; } = null!;
+        public string carparkInfoId { get; set; } = null!;
         public string address { get; set; } = null!;
         public decimal xCoord { get; set; }
         public decimal yCoord { get; set; }

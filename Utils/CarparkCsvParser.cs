@@ -6,17 +6,17 @@ namespace carpark_info_assignment
 {
     public class CarparkCsvParser : IFileParser
     {        
-        public List<CarparkModel> parseFile(string filePath)
+        public List<CarparkInfo> parseFile(string filePath)
         {
-            List<CarparkModel> records = new List<CarparkModel>();
+            List<CarparkInfo> records = new List<CarparkInfo>();
             try{
                     using (var reader = new StreamReader(filePath))
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
                         
                         try{
-                            csv.Context.RegisterClassMap<CarparkModelMap>();
-                            records = csv.GetRecords<CarparkModel>().ToList();
+                            csv.Context.RegisterClassMap<CarparkInfoMap>();
+                            records = csv.GetRecords<CarparkInfo>().ToList();
 
                         }
                         catch (UnauthorizedAccessException e)

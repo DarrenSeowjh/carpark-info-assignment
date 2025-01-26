@@ -28,7 +28,7 @@ namespace carpark_info_assignment
         }
         public void InsertRepositoryDataFromFile(string csvFilePath)
         {
-            List<CarparkModel> infos = fileParser.parseFile(csvFilePath);
+            List<CarparkInfo> infos = fileParser.parseFile(csvFilePath);
             repo.PersistCarparksData(infos);
         }
     }

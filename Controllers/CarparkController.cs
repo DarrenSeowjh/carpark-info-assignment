@@ -16,10 +16,10 @@ namespace carpark_info_assignment
         
         
         [HttpGet("filter")]
-        public ActionResult<IEnumerable<CarparkModel>> GetFilteredCarparkList(
+        public ActionResult<IEnumerable<CarparkInfo>> GetFilteredCarparkList(
                                 [FromQuery]CarparkFilters filter)
         {
-            List<CarparkModel> info = carparkInfoService.GetFilteredCarparkList(filter);
+            List<CarparkInfo> info = carparkInfoService.GetFilteredCarparkList(filter);
             return info.ToArray();
         }
         

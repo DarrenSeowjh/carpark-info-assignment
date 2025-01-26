@@ -18,13 +18,13 @@ namespace carpark_info_assignment
         private void RunDeltaFileUpdateTask(object? state)
         {
             Console.WriteLine($"Running Task at {DateTime.Now.ToUniversalTime()}"); 
-            List<CarparkModel> carparks = fileParser.parseFile(config.GetValue<string>("DailyDeltaFilePath"));
+            List<CarparkInfo> carparks = fileParser.parseFile(config.GetValue<string>("DailyDeltaFilePath"));
             var dbInfo = dbContext.CarparkInfo;
             try
             {
                 foreach(var carpark in carparks)
                 {
-                    var row = dbInfo.Find(carpark.carparkModelId);
+                    var row = dbInfo.Find(carpark.carparkInfoId);
                     if(row != null)
                     {
                         row.address = carpark.address;
@@ -41,7 +41,7 @@ namespace carpark_info_assignment
                     }
                     else
                     {
-                        if(carpark.carparkModelId == "")
+                        if(carpark.carparkInfoId == "")
                             throw new Exception("carpark ID is empty or null");
                         dbContext.Add(carpark);
                     }

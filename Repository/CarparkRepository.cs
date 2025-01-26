@@ -18,18 +18,18 @@ namespace carpark_info_assignment
             dbContext.SaveChanges();
         }
 
-        public void PersistCarparksData(List<CarparkModel> infos)
+        public void PersistCarparksData(List<CarparkInfo> infos)
         {
-            foreach(CarparkModel info in infos)
+            foreach(CarparkInfo info in infos)
             {
                 dbContext.Add(info);
             }
             dbContext.SaveChanges();
         }      
-        public List<CarparkModel> GetFilteredCarparkList(CarparkFilters filters)
+        public List<CarparkInfo> GetFilteredCarparkList(CarparkFilters filters)
         {
             var CarparkInfoTable = dbContext.CarparkInfo;
-            IQueryable<CarparkModel> result = CarparkInfoTable;
+            IQueryable<CarparkInfo> result = CarparkInfoTable;
             const string noFreeParkingStr = "NO";
             if(filters.hasFreeParking.HasValue)
             {                

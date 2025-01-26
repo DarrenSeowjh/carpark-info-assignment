@@ -9,7 +9,7 @@ namespace carpark_info_assignment
             carparkInfoRepo = _carparkInfoRepo;
         }
 
-        public List<CarparkModel> GetFilteredCarparkList(CarparkFilters filters)
+        public List<CarparkInfo> GetFilteredCarparkList(CarparkFilters filters)
         {
             return carparkInfoRepo.GetFilteredCarparkList(filters);
         }

@@ -5,7 +5,7 @@ namespace carpark_info_assignment
     public class CarparkDbContext : DbContext
     {
 
-        public DbSet<CarparkModel> CarparkInfo => Set<CarparkModel>();
+        public DbSet<CarparkInfo> CarparkInfo => Set<CarparkInfo>();
         private readonly IConfiguration config;
 
         public CarparkDbContext(IConfiguration _config)
